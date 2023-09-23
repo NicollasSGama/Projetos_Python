@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 # -------------------------------------------
 # CEP
 # -------------------------------------------
@@ -12,5 +13,6 @@ def obterCEP(cep):
     return endereco
 # -------------------------------------------
 
-cep = input('Digite o CEP: ')
-print(obterCEP(cep))
+# cep = input('Digite o CEP: ')
+# print(obterCEP(cep))
+# cep = print(obterCEP(input('Digite o CEP: ')))
