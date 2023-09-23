@@ -15,6 +15,10 @@
 #-------------------------------------------
 corTexto='#FFFFFF'
 corTitulo='#FFFFFF'
+tamanhoTexto = 5
+tamanhoTitulo = 10
+tamanhoEntrada = 60
+tamanhoEntradaP = 25
 #-------------------------------------------
 fonteTexto=('arial',15)
 fonteTitulo=('arial',15,'bold')
