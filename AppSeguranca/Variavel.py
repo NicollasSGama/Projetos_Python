@@ -20,8 +20,8 @@ tamanhoTitulo = 10
 tamanhoEntrada = 60
 tamanhoEntradaP = 25
 #-------------------------------------------
-fonteTexto=('arial',15)
-fonteTitulo=('arial',15,'bold')
+fonteTexto=('arial', 15)
+fonteTitulo=('arial', 15, 'bold')
 #-------------------------------------------
 corFundo='#2F6073'
 corFundoBranco='#FFFFFF'
