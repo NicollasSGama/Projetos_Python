@@ -59,4 +59,4 @@ def janelaCadastrarFuncionario():
     ]
     return sg.Window("Cadastro",layout,resizable=True,background_color="#2F6073")
 
-janelaLogin().read()
+janelaRecuperarSenha().read()

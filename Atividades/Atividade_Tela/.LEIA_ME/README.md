@@ -1,5 +1,5 @@
 # Atividade: Captura de dados
-O presente arquivo destina-se à elaboração de uma tela que capture os danos e salve em um '.txt' simulando um banco de dados.
+O presente arquivo destina-se à elaboração de uma tela que capture os dados e salve em um '.txt' simulando um banco de dados.
 
 ## Visão-Geral
 * A interface de usuário será realizada com a biblioteca:
