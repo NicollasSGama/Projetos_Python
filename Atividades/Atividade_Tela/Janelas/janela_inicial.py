@@ -11,9 +11,9 @@ def janela_atividade():
     theme(tema)
 
     tabela = ['Nome',
-                'Sobrenome',
-                'E-mail'
-                ]
+              'Sobrenome',
+              'E-mail'
+              ]
 
     layout_esquerdo = [
         [

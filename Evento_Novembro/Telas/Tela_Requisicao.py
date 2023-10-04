@@ -10,6 +10,8 @@ from PySimpleGUI import (
 )
 
 tema = 'LightBlue2'
+
+
 def tela_requisicao():
     theme(tema)
 
@@ -23,7 +25,7 @@ def tela_requisicao():
         ]
     ]
 
-    problema = [
+    problema_professor = [
         [
             'Computador'
         ],
@@ -33,34 +35,55 @@ def tela_requisicao():
         ]
     ]
 
-    professor = [
+    problema_funcionario = [
+        [
+            'Manutenção'
+        ],
+
+        [
+            'Ajustes'
+        ]
+    ]
+
+    professores = [
         [
             'Rogério'
         ],
 
         [
-            'André'
+            'Joselito'
+        ]
+    ]
+
+    funcionarios = [
+        [
+            'Pedrinho'
+        ],
+
+        [
+            'Adalberto'
         ]
     ]
 
     layout_esquerdo = [
         [
-            Text('Setor')
+            Text(text='Setor')
         ],
 
         [
-            Combo(setor,
+            Combo(values=setor,
                   size=(21, 1))
         ],
 
         [
-            Text('Professor')
+            Text(text='Professor')
         ],
 
         [
-            Combo(professor,
-                  key=,
-                  size=(21, 1))
+            Combo(values='',
+                  key='-PROFESSOR-',
+                  size=(21, 1),
+                  enable_events=True)
         ],
 
         [
@@ -68,23 +91,25 @@ def tela_requisicao():
         ],
 
         [
-            Button('FECHAR')
+            Button(button_text='LISTAR')
         ]
 
     ]
 
     layout_direito = [
         [
-            Text('Problema')
+            Text(text='Problema')
         ],
 
         [
-            Combo(problema,
-                  size=(21, 1))
+            Combo(values='',
+                  key='-PROBLEMA-',
+                  size=(21, 1),
+                  enable_events=True)
         ],
 
         [
-            Text('Data')
+            Text(text='Data')
         ],
 
         [
@@ -92,12 +117,11 @@ def tela_requisicao():
                   key='-DATA-',
                   size=(15, 1)),
 
-            CalendarButton('DATA',
+            CalendarButton(button_text='DATA',
                            default_date_m_d_y=(1, 1, 2023),
                            format='%d/%m/%Y',
                            close_when_date_chosen=False,
-                           target='-DATA-'
-                           )
+                           target='-DATA-')
         ],
 
         [
@@ -106,28 +130,37 @@ def tela_requisicao():
 
         [
             Push(),
-            Button('REQUISITAR')
+            Button(button_text='REQUISITAR',
+                   key='-REQUISITAR-')
         ]
     ]
 
-    layout = [
+    layout_coluna = [
         [
-            Column(layout_esquerdo),
+            Column(layout=layout_esquerdo),
             VSeparator(),
-            Column(layout_direito)
+            Column(layout=layout_direito)
         ]
     ]
 
     layout = [
         [
-            Frame('REQUISITAR',
-                  layout)
+            Frame(title='REQUISITAR',
+                  layout=layout_coluna)
         ]
     ]
 
+    return Window(title='REGISTRAR',
+                  layout=layout,
+                  finalize=True)
 
-    return Window('',
-                  layout)
 
 janela = tela_requisicao()
-janela.read()
+
+while True:
+    eventos, valores = janela.read()
+    match eventos:
+        case '-REQUISITAR-':
+            pass
+        case WIN_CLOSED:
+            break
