@@ -72,7 +72,8 @@ def tela_requisicao():
 
         [
             Combo(values=setor,
-                  size=(21, 1))
+                  size=(21, 1),
+                  key='-SETOR-')
         ],
 
         [
@@ -160,6 +161,9 @@ janela = tela_requisicao()
 while True:
     eventos, valores = janela.read()
     match eventos:
+        case '-SETOR-':
+            janela['-PROFESSOR-'].update(values=)
+
         case '-REQUISITAR-':
             pass
         case WIN_CLOSED:
