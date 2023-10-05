@@ -11,59 +11,60 @@ from PySimpleGUI import (
 
 tema = 'LightBlue2'
 
+setor = [
+    [
+        'Sala-Professor'
+    ],
+
+    [
+        'Sala-Funcionário'
+    ]
+]
+
+problema_professor = [
+    [
+        'Computador'
+    ],
+
+    [
+        'Limpeza'
+    ]
+]
+
+problema_funcionario = [
+    [
+        'Manutenção'
+    ],
+
+    [
+        'Ajustes'
+    ]
+]
+
+professores = [
+    [
+        'Rogério'
+    ],
+
+    [
+        'Joselito'
+    ]
+]
+
+funcionarios = [
+    [
+        'Pedrinho'
+    ],
+
+    [
+        'Adalberto'
+    ]
+]
+
 
 def tela_requisicao():
     theme(tema)
 
-    setor = [
-        [
-            'Sala-Professor'
-        ],
-
-        [
-            'Sala-Funcionário'
-        ]
-    ]
-
-    problema_professor = [
-        [
-            'Computador'
-        ],
-
-        [
-            'Limpeza'
-        ]
-    ]
-
-    problema_funcionario = [
-        [
-            'Manutenção'
-        ],
-
-        [
-            'Ajustes'
-        ]
-    ]
-
-    professores = [
-        [
-            'Rogério'
-        ],
-
-        [
-            'Joselito'
-        ]
-    ]
-
-    funcionarios = [
-        [
-            'Pedrinho'
-        ],
-
-        [
-            'Adalberto'
-        ]
-    ]
 
     layout_esquerdo = [
         [
@@ -73,7 +74,8 @@ def tela_requisicao():
         [
             Combo(values=setor,
                   size=(21, 1),
-                  key='-SETOR-')
+                  key='-SETOR-',
+                  enable_events=True)
         ],
 
         [
@@ -162,8 +164,13 @@ while True:
     eventos, valores = janela.read()
     match eventos:
         case '-SETOR-':
-            janela['-PROFESSOR-'].update(values=)
+            for i in setor:
 
+                janela['-PROFESSOR-'].update(values=professores)
+                janela['-PROBLEMA-'].update(values=problema_professor)
+
+                janela['-FUNCIONARIO-'].update(values=funcionarios)
+                janela['-PROBLEMA-'].update(values=problema_funcionario)
         case '-REQUISITAR-':
             pass
         case WIN_CLOSED:
