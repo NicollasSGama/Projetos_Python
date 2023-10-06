@@ -190,9 +190,9 @@ while True:
         elif valores['-SETOR-'] == ['Sala-Funcionário']:
             janela['-FUNCIONARIO-'].update(values=funcionarios)
             janela['-PROBLEMA-'].update(values=problema_funcionario)
+
     if eventos == '-REQUISITAR-':
         pass
 
     if eventos == WIN_CLOSED:
         break
-
