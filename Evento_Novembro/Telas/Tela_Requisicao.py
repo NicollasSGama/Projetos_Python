@@ -6,7 +6,7 @@ from PySimpleGUI import (
     popup_get_text, Frame,
     Column, Combo, Push,
     theme, VSeparator,
-    HSeparator
+    HSeparator, read_all_windows
 )
 
 tema = 'LightBlue2'
@@ -65,7 +65,6 @@ funcionarios = [
 def tela_requisicao():
     theme(tema)
 
-
     layout_esquerdo = [
         [
             Text(text='Setor')
@@ -79,24 +78,15 @@ def tela_requisicao():
         ],
 
         [
-            Text(text='Professor')
+            Text(text='Funcionário')
         ],
 
         [
             Combo(values='',
-                  key='-PROFESSOR-',
+                  key='-FUNCIONARIO-',
                   size=(21, 1),
                   enable_events=True)
-        ],
-
-        [
-            HSeparator()
-        ],
-
-        [
-            Button(button_text='LISTAR')
         ]
-
     ]
 
     layout_direito = [
@@ -125,13 +115,21 @@ def tela_requisicao():
                            format='%d/%m/%Y',
                            close_when_date_chosen=False,
                            target='-DATA-')
+        ]
+    ]
+
+    layout_comentario = [
+        [
+            Text('Observação')
         ],
 
         [
-            HSeparator()
+            Input(size=(52, 1),
+                      key='-COMENTARIO-')
         ],
 
         [
+            Button(button_text='LISTAR'),
             Push(),
             Button(button_text='REQUISITAR',
                    key='-REQUISITAR-')
@@ -150,6 +148,11 @@ def tela_requisicao():
         [
             Frame(title='REQUISITAR',
                   layout=layout_coluna)
+        ],
+
+        [
+            Frame(title='COMENTÁRIO',
+                  layout=layout_comentario)
         ]
     ]
 
@@ -160,18 +163,36 @@ def tela_requisicao():
 
 janela = tela_requisicao()
 
+# while True:
+#     eventos, valores = janela.read()
+#     match eventos:
+#         case '-SETOR-':
+#             for i in setor:
+#                 if i == 'Sala-Professor':
+#                     janela['-FUNCIONARIO-'].update(values=professores)
+#                     janela['-PROBLEMA-'].update(values=problema_professor)
+#                 elif i == 'Sala-Funcionário':
+#                     janela['-FUNCIONARIO-'].update(values=funcionarios)
+#                     janela['-PROBLEMA-'].update(values=problema_funcionario)
+#         case '-REQUISITAR-':
+#             pass
+#         case '-LISTAR-':
+#             pass
+#         case WIN_CLOSED:
+#             break
 while True:
     eventos, valores = janela.read()
-    match eventos:
-        case '-SETOR-':
-            for i in setor:
 
-                janela['-PROFESSOR-'].update(values=professores)
-                janela['-PROBLEMA-'].update(values=problema_professor)
+    if eventos == '-SETOR-':
+        if valores['-SETOR-'] == ['Sala-Professor']:
+            janela['-FUNCIONARIO-'].update(values=professores)
+            janela['-PROBLEMA-'].update(values=problema_professor)
+        elif valores['-SETOR-'] == ['Sala-Funcionário']:
+            janela['-FUNCIONARIO-'].update(values=funcionarios)
+            janela['-PROBLEMA-'].update(values=problema_funcionario)
+    if eventos == '-REQUISITAR-':
+        pass
 
-                janela['-FUNCIONARIO-'].update(values=funcionarios)
-                janela['-PROBLEMA-'].update(values=problema_funcionario)
-        case '-REQUISITAR-':
-            pass
-        case WIN_CLOSED:
-            break
+    if eventos == WIN_CLOSED:
+        break
+
