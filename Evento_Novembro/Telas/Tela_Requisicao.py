@@ -5,60 +5,37 @@ from PySimpleGUI import (
     Window, WIN_CLOSED,
     popup_get_text, Frame,
     Column, Combo, Push,
-    theme, VSeparator,
+    theme, VSeparator, popup,
     HSeparator, read_all_windows
 )
+from Evento_Novembro.Funcoes.Arquivos import *
 
 tema = 'LightBlue2'
 
 setor = [
-    [
-        'Sala-Professor'
-    ],
-
-    [
-        'Sala-Funcionário'
-    ]
+    'Sala-Professor',
+    'Sala-Funcionário'
 ]
 
 problema_professor = [
-    [
-        'Computador'
-    ],
-
-    [
-        'Limpeza'
-    ]
+    'Computador',
+    'Limpeza'
 ]
 
 problema_funcionario = [
-    [
-        'Manutenção'
-    ],
-
-    [
-        'Ajustes'
-    ]
+    'Manutenção',
+    'Ajustes'
 ]
 
-professores = [
-    [
-        'Rogério'
-    ],
 
-    [
-        'Joselito'
-    ]
+professores = [
+    'Rogério',
+    'Joselito'
 ]
 
 funcionarios = [
-    [
-        'Pedrinho'
-    ],
-
-    [
-        'Adalberto'
-    ]
+    'Pedrinho',
+    'Adalberto'
 ]
 
 
@@ -74,18 +51,20 @@ def tela_requisicao():
             Combo(values=setor,
                   size=(21, 1),
                   key='-SETOR-',
-                  enable_events=True)
+                  enable_events=True,
+                  readonly=True)
         ],
 
         [
-            Text(text='Funcionário')
+            Text(text='Requerente')
         ],
 
         [
             Combo(values='',
-                  key='-FUNCIONARIO-',
+                  key='-REQUERENTE-',
                   size=(21, 1),
-                  enable_events=True)
+                  enable_events=True,
+                  readonly=True)
         ]
     ]
 
@@ -98,7 +77,8 @@ def tela_requisicao():
             Combo(values='',
                   key='-PROBLEMA-',
                   size=(21, 1),
-                  enable_events=True)
+                  enable_events=True,
+                  readonly=True)
         ],
 
         [
@@ -125,7 +105,7 @@ def tela_requisicao():
 
         [
             Input(size=(52, 1),
-                      key='-COMENTARIO-')
+                  key='-COMENTARIO-')
         ],
 
         [
@@ -162,6 +142,36 @@ def tela_requisicao():
 
 
 janela = tela_requisicao()
+# ------------------------------------
+while True:
+    eventos, valores = janela.read()
+
+    if eventos == '-SETOR-':
+        if valores['-SETOR-'] == 'Sala-Professor':
+            janela['-REQUERENTE-'].update(values=professores)
+            janela['-PROBLEMA-'].update(values=problema_professor)
+        elif valores['-SETOR-'] == 'Sala-Funcionário':
+            janela['-REQUERENTE-'].update(values=funcionarios)
+            janela['-PROBLEMA-'].update(values=problema_funcionario)
+
+    if eventos == '-REQUISITAR-':
+        setor = valores['-SETOR-']
+        requerente = valores['-REQUERENTE-']
+        problema = valores['-PROBLEMA-']
+        data = valores['-DATA-']
+        comentario = valores['-COMENTARIO-']
+        with open('requisicao.txt', 'a+') as requisicao:
+            requisicao.write(f'{setor} {requerente} {problema} {data} {comentario}\n')
+            popup('REQUISIÇÃO REALIZADA!')  # centralizar o botão
+            janela['-COMENTARIO-'].update('')
+
+    if eventos == '-LISTAR-':
+        pass
+
+    if eventos == WIN_CLOSED:
+        break
+# ------------------------------------
+janela.close()
 
 # while True:
 #     eventos, valores = janela.read()
@@ -180,19 +190,3 @@ janela = tela_requisicao()
 #             pass
 #         case WIN_CLOSED:
 #             break
-while True:
-    eventos, valores = janela.read()
-
-    if eventos == '-SETOR-':
-        if valores['-SETOR-'] == ['Sala-Professor']:
-            janela['-FUNCIONARIO-'].update(values=professores)
-            janela['-PROBLEMA-'].update(values=problema_professor)
-        elif valores['-SETOR-'] == ['Sala-Funcionário']:
-            janela['-FUNCIONARIO-'].update(values=funcionarios)
-            janela['-PROBLEMA-'].update(values=problema_funcionario)
-
-    if eventos == '-REQUISITAR-':
-        pass
-
-    if eventos == WIN_CLOSED:
-        break
