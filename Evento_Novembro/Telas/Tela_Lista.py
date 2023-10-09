@@ -7,6 +7,7 @@ from PySimpleGUI import (
     Column, Combo, Push,
     theme, VSeparator, VPush,
     HSeparator, Tab, TabGroup,
+    popup_yes_no
 )
 from Evento_Novembro.Funcoes.Arquivos import *
 
@@ -150,6 +151,9 @@ while True:
     # if janela['-TPENDENTES-'] in eventos:
     if '+CLICKED+' in eventos:
         popup('Deu certo')
+
+    if '-REGISTRAR-' in eventos:
+        popup_yes_no('REGISTRAR?')
 
     if eventos == '-ATUALIZAR-':
         janela['-TPENDENTES-'].update(values=ler_txt())
