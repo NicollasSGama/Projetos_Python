@@ -2,8 +2,8 @@
 from PySimpleGUI import (
     Input, Window, Button,
     Frame, Text, theme,
-    Column, Push, popup,
-    WIN_CLOSED, popup_no_buttons
+    popup_no_buttons, popup,
+    WIN_CLOSED
 )
 
 
