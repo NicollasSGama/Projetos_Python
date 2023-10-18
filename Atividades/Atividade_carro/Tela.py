@@ -3,7 +3,7 @@ from PySimpleGUI import (
     Input, Window, Button,
     Frame, Text, theme,
     Column, Push, popup,
-    WIN_CLOSED
+    WIN_CLOSED, popup_no_buttons
 )
 
 
@@ -45,20 +45,27 @@ while True:
         break
     if '-BVEL-' in evento:
         num = valor['-VEL-']
-        num = int(num)
-        if num == 0:
-            popup('Neutro')
-        if num <= 20:
-            popup('1° Marcha')
-        if 20 > num >= 40:
-            popup('2° Marcha')
-        if 40 > num >= 50:
-            popup('3° Marcha')
-        if 50 > num >= 60:
-            popup('4° Marcha')
-        if num > 60:
-            popup('5° Marcha')
+        # ----------------------------
+        # Validação da variável
+        #----------------------------
+        if not num.isdigit():
+            popup('Valor inválido.')
         else:
-            popup('Valor inválido')
-    janela['-VEL-'].update('')
+            num = int(num)
+            # ----------------------------
+            # Condições para a troca
+            # ----------------------------
+            if num == 0:
+                popup_no_buttons(image='marcha.png')
+            if num in range(1, 21):
+                popup_no_buttons(image='marcha_1.png')
+            if num in range(21, 41):
+                popup_no_buttons(image='marcha_2.png')
+            if num in range(41, 51):
+                popup_no_buttons(image='marcha_3.png')
+            if num in range(51, 61):
+                popup_no_buttons(image='marcha_4.png')
+            if num > 60:
+                popup_no_buttons(image='marcha_5.png')
+        janela['-VEL-'].update('')
 janela.close()
