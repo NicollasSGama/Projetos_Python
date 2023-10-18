@@ -150,7 +150,8 @@ while True:
     eventos, valores = janela.read()
     # if janela['-TPENDENTES-'] in eventos:
     if '+CLICKED+' in eventos:
-        popup('Deu certo')
+        valor = janela["-TPENDENTES-"]
+        print(valor)
 
     if '-REGISTRAR-' in eventos:
         popup_yes_no('REGISTRAR?')
@@ -160,6 +161,5 @@ while True:
 
     if eventos == WIN_CLOSED:
         break
-
 
 janela.close()
