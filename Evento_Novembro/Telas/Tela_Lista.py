@@ -155,6 +155,8 @@ while True:
 
     if '-REGISTRAR-' in eventos:
         popup_yes_no('REGISTRAR?')
+        if 'YES':
+            popup('entrou')
 
     if eventos == '-ATUALIZAR-':
         janela['-TPENDENTES-'].update(values=ler_txt())
