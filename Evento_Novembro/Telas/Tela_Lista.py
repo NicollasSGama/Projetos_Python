@@ -150,13 +150,20 @@ while True:
     eventos, valores = janela.read()
     # if janela['-TPENDENTES-'] in eventos:
     if '+CLICKED+' in eventos:
-        valor = janela["-TPENDENTES-"]
-        print(valor)
+        valor = eventos[2][0]
+        if valor == -1 or None:
+            None
+        if valor in range(0, 9999):
+            if valor == 0:
+                pass
+            print(valor)
 
     if '-REGISTRAR-' in eventos:
         popup_yes_no('REGISTRAR?')
-        if 'YES':
-            popup('entrou')
+        # if 'Nada':
+        #     popup('Entrou')
+        # if 'No':
+        #     None
 
     if eventos == '-ATUALIZAR-':
         janela['-TPENDENTES-'].update(values=ler_txt())
