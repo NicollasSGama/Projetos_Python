@@ -145,12 +145,15 @@ def tabela():
 
 
 janela = tabela()
+registro = list()
 
 while True:
     eventos, valores = janela.read()
     # if janela['-TPENDENTES-'] in eventos:
     if '+CLICKED+' in eventos:
+
         valor = eventos[2][0]
+        print(janela["-TPENDENTES-"].get()[valor])
         if valor == -1 or None:
             None
         if valor in range(0, 9999):
@@ -160,7 +163,9 @@ while True:
 
     if '-REGISTRAR-' in eventos:
         popup_yes_no('REGISTRAR?')
-        # if 'Nada':
+        if '+CLICKED+' in eventos:
+            checar = eventos
+            print(checar)
         #     popup('Entrou')
         # if 'No':
         #     None
